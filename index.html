@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Minute Knowledge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f7f5;
+            color: #1a1a2e;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ----- TOP NAVIGATION ----- */
+        .top-nav {
+            background: #ffffff;
+            border-bottom: 1px solid #f0ede8;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            color: #1a1a2e;
+            cursor: pointer;
+        }
+
+        .nav-logo i {
+            font-size: 1.8rem;
+            color: #ad927b;
+        }
+
+        .nav-logo span {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-logo .logo-sub {
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: #9b8f80;
+            -webkit-text-fill-color: #9b8f80;
+            display: block;
+            margin-top: -2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            text-decoration: none;
+            color: #6b6570;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-menu a i {
+            font-size: 0.9rem;
+        }
+
+        .nav-menu a:hover {
+            background: #f0edea;
+            color: #1a1a2e;
+        }
+
+        .nav-menu a.active {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .nav-menu a.active i {
+            color: #ffffff;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #1a1a2e;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* ----- BREADCRUMB ----- */
+        .breadcrumb {
+            max-width: 1280px;
+            margin: 1.5rem auto 0;
+            padding: 0 2rem;
+            font-size: 0.85rem;
+            color: #9b8f80;
+        }
+
+        .breadcrumb a {
+            color: #6b6570;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .breadcrumb a:hover {
+            color: #1a1a2e;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 0.5rem;
+            color: #d5cec5;
+        }
+
+        .breadcrumb .current {
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        /* ----- MAIN CONTENT ----- */
+        .main-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 70vh;
+        }
+
+        /* ----- PAGE SECTIONS ----- */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ----- HOME PAGE ----- */
+        .home-wrapper {
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.08);
+            padding: 2.8rem 3rem;
+        }
+
+        .home-hero {
+            text-align: center;
+            padding: 1rem 0 2rem;
+        }
+
+        .home-hero .hero-icon {
+            font-size: 4rem;
+            color: #ad927b;
+            margin-bottom: 1rem;
+        }
+
+        .home-hero h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .home-hero p {
+            font-size: 1.1rem;
+            color: #6b6570;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .home-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: #f8f7f5;
+            border-radius: 1.5rem;
+            border: 1px solid #f0ede8;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-4px);
+            border-color: #d5cec5;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .feature-item .feature-icon {
+            font-size: 2.5rem;
+            color: #ad927b;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-item h4 {
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 0.3rem;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: #6b6570;
+        }
+
+        /* Daily Fact */
+        .daily-fact-block {
+            background: linear-gradient(135deg, #f8f6f3, #f1eee9);
+            border-radius: 2rem;
+            padding: 2rem 2.5rem;
+            margin: 1.5rem 0 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #e8e3dd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .daily-fact-block:hover {
+            border-color: #d5cec5;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            transform: scale(1.01);
+        }
+
+        .fact-text {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex: 1;
+        }
+
+        .fact-text i {
+            font-size: 2.6rem;
+            color: #ad927b;
+            opacity: 0.8;
+        }
+
+        .fact-text .fact-content {
+            font-size: 1.2rem;
+            font-weight: 450;
+            color: #2c2c3a;
+        }
+
+        .fact-text .highlight {
+            font-weight: 600;
+            color: #1f1f2e;
+            background: #e7e1d9;
+            padding: 0.15rem 1rem;
+            border-radius: 60px;
+            margin-right: 0.5rem;
+            display: inline-block;
+        }
+
+        .fact-meta {
+            font-size: 0.8rem;
+            color: #7b7164;
+            background: #eae5de;
+            padding: 0.4rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Topic Grid */
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .topic-card {
+            background: #fcfcfa;
+            border-radius: 1.8rem;
+            padding: 2rem 1.8rem 1.8rem;
+            border: 1px solid #f0ede8;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c4b5a3, #e8ddd0);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-6px);
+            border-color: #d5cec5;
+            box-shadow: 0 16px 30px -12px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+        }
+
+        .topic-card:hover::before {
+            opacity: 1;
+        }
+
+        .topic-card .topic-icon {
+            font-size: 3rem;
+            color: #5b4b3a;
+            margin-bottom: 1rem;
+        }
+
+        .topic-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 0.3rem;
+        }
+
+        .topic-card p {
+            font-size: 0.9rem;
+            color: #6b6570;
+        }
+
+        .topic-card .explore-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.4rem 1.5rem;
+            background: #1a1a2e;
+            color: #ffffff;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .topic-card:hover .explore-btn {
+            background: #2d2d44;
+            transform: scale(1.05);
+        }
+
+        /* ----- TOPIC DETAIL PAGE ----- */
+        .topic-detail-wrapper {
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.08);
+            padding: 2.8rem 3rem;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f0ede8;
+            margin-bottom: 2rem;
+        }
+
+        .topic-header .topic-big-icon {
+            font-size: 3.5rem;
+            color: #ad927b;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f6f3;
+            border-radius: 1.5rem;
+        }
+
+        .topic-header .topic-title h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .topic-header .topic-title p {
+            color: #6b6570;
+            font-size: 1rem;
+        }
+
+        .fact-display {
+            background: linear-gradient(135deg, #f8f6f3, #f1eee9);
+            border-radius: 2rem;
+            padding: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #e8e3dd;
+        }
+
+        .fact-display .fact-icon {
+            font-size: 3rem;
+            color: #ad927b;
+            margin-bottom: 1rem;
+        }
+
+        .fact-display .fact-text-large {
+            font-size: 1.4rem;
+            font-weight: 450;
+            color: #2c2c3a;
+            max-width: 800px;
+            line-height: 1.8;
+        }
+
+        .fact-display .fact-counter {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #9b8f80;
+        }
+
+        .fact-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-refresh {
+            padding: 0.8rem 2.5rem;
+            background: #1a1a2e;
+            color: #ffffff;
+            border: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .btn-refresh:hover {
+            background: #2d2d44;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 26, 46, 0.2);
+        }
+
+        .btn-refresh:active {
+            transform: scale(0.97);
+        }
+
+        .btn-back {
+            padding: 0.8rem 2rem;
+            background: #f0edea;
+            color: #1a1a2e;
+            border: 1px solid #e8e3dd;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .btn-back:hover {
+            background: #e8e3dd;
+            transform: translateY(-2px);
+        }
+
+        .topic-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #f0ede8;
+        }
+
+        .topic-stats .stat-item {
+            text-align: center;
+        }
+
+        .topic-stats .stat-item .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .topic-stats .stat-item .stat-label {
+            font-size: 0.85rem;
+            color: #6b6570;
+        }
+
+        /* ----- ABOUT PAGE ----- */
+        .about-content {
+            background: #ffffff;
+            border-radius: 2.5rem;
+            padding: 3rem;
+            box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.08);
+        }
+
+        .about-content h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1a1a2e;
+        }
+
+        .about-content .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .about-card {
+            background: #f8f7f5;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border: 1px solid #f0ede8;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .about-card:hover {
+            border-color: #d5cec5;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .about-card i {
+            font-size: 2.5rem;
+            color: #ad927b;
+            margin-bottom: 1rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-card p {
+            color: #6b6570;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .footer {
+            max-width: 1280px;
+            margin: 2rem auto 0;
+            padding: 2rem;
+            border-top: 1px solid #f0ede8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer .python-badge {
+            background: #e9e6e1;
+            padding: 0.4rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: #3d3a44;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer .python-badge i {
+            color: #4d7aa8;
+            font-size: 1.1rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 4px solid #f0ede8;
+            border-radius: 50%;
+            border-top-color: #ad927b;
+            animation: spin 0.8s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1a1a2e;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 2000;
+            max-width: 400px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            margin-right: 0.5rem;
+            color: #ad927b;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 1024px) {
+            .home-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .topic-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #ffffff;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                border-bottom: 1px solid #f0ede8;
+            }
+
+            .nav-menu.open {
+                display: flex;
+            }
+
+            .nav-menu a {
+                padding: 0.8rem 1rem;
+                width: 100%;
+            }
+
+            .home-wrapper,
+            .topic-detail-wrapper,
+            .about-content {
+                padding: 1.8rem 1.5rem;
+            }
+
+            .home-features {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .topic-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.2rem;
+            }
+
+            .daily-fact-block {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1.6rem;
+            }
+
+            .fact-text .fact-content {
+                font-size: 1rem;
+            }
+
+            .topic-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .fact-display {
+                padding: 2rem 1.5rem;
+            }
+
+            .fact-display .fact-text-large {
+                font-size: 1.1rem;
+            }
+
+            .top-nav {
+                padding: 0 1rem;
+            }
+
+            .breadcrumb {
+                padding: 0 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .topic-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .home-features {
+                grid-template-columns: 1fr;
+            }
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .home-wrapper,
+            .topic-detail-wrapper,
+            .about-content {
+                padding: 1.2rem 1rem;
+            }
+
+            .home-hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .toast {
+                bottom: 1rem;
+                right: 1rem;
+                left: 1rem;
+                max-width: none;
+                font-size: 0.85rem;
+            }
+
+            .fact-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .fact-actions button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOP NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-logo" data-page="home">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                    <span>One Minute Knowledge</span>
+                    <span class="logo-sub">Learn daily · Grow daily</span>
+                </div>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a data-page="home" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a data-page="topics"><i class="fas fa-th-list"></i> Topics</a></li>
+                <li><a data-page="about"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <a data-page="home">Home</a>
+        <span class="separator">/</span>
+        <span class="current" id="breadcrumbCurrent">Dashboard</span>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        
+        <!-- HOME PAGE -->
+        <div class="page-section active" id="page-home">
+            <div class="home-wrapper">
+                <!-- Hero -->
+                <div class="home-hero">
+                    <div class="hero-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h2>Learn Something New Every Day</h2>
+                    <p>Bite-sized wisdom delivered in just one minute. Explore, learn, and grow.</p>
+                </div>
+
+                <!-- Features -->
+                <div class="home-features">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                        <h4>Daily Facts</h4>
+                        <p>Start your day with curiosity</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                        <h4>Life Skills</h4>
+                        <p>Practical wisdom for life</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h4>Career Growth</h4>
+                        <p>Advance your professional journey</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-coins"></i></div>
+                        <h4>Money Tips</h4>
+                        <p>Smart financial habits</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
+                        <h4>Health Awareness</h4>
+                        <p>Wellness that matters</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-microchip"></i></div>
+                        <h4>Tech Updates</h4>
+                        <p>Stay current with technology</p>
+                    </div>
+                </div>
+
+                <!-- Daily Fact -->
+                <div class="daily-fact-block" id="dailyFactBlock">
+                    <div class="fact-text">
+                        <i class="fas fa-lightbulb"></i>
+                        <div class="fact-content">
+                            <span class="highlight">Did you know?</span>
+                            <span id="factText">Loading daily fact...</span>
+                        </div>
+                    </div>
+                    <div class="fact-meta">
+                        <i class="far fa-clock"></i> 1 min read
+                        <i class="fas fa-sync-alt refresh-icon" style="margin-left: 0.5rem;"></i>
+                    </div>
+                </div>
+
+                <!-- Topic Cards -->
+                <h3 style="margin: 2rem 0 1rem; font-size: 1.5rem; color: #1a1a2e;">
+                    <i class="fas fa-th-list" style="color: #ad927b;"></i> Explore Topics
+                </h3>
+                <div class="topic-grid" id="topicGrid">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TOPIC DETAIL PAGE -->
+        <div class="page-section" id="page-topic-detail">
+            <div class="topic-detail-wrapper">
+                <div class="topic-header">
+                    <div class="topic-big-icon" id="topicDetailIcon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="topic-title">
+                        <h2 id="topicDetailTitle">Topic Name</h2>
+                        <p id="topicDetailDesc">Click refresh to get a new fact</p>
+                    </div>
+                </div>
+
+                <div class="fact-display">
+                    <div class="fact-icon"><i class="fas fa-quote-right"></i></div>
+                    <div class="fact-text-large" id="topicFactDisplay">
+                        Click the refresh button to get a random fact!
+                    </div>
+                    <div class="fact-counter" id="factCounter">Fact #1</div>
+                </div>
+
+                <div class="fact-actions">
+                    <button class="btn-refresh" id="refreshFactBtn">
+                        <i class="fas fa-sync-alt"></i> Refresh Fact
+                    </button>
+                    <button class="btn-back" id="backToHomeBtn">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </button>
+                </div>
+
+                <div class="topic-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalFactsInTopic">0</div>
+                        <div class="stat-label">Facts Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="factsViewed">0</div>
+                        <div class="stat-label">Facts Viewed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number"><i class="fas fa-clock" style="color: #ad927b;"></i></div>
+                        <div class="stat-label">1 Minute Read</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div class="page-section" id="page-about">
+            <div class="about-content">
+                <h2><i class="fas fa-info-circle" style="color: #ad927b; margin-right: 0.8rem;"></i>About One Minute Knowledge</h2>
+                <p style="color: #6b6570; font-size: 1.05rem; margin-bottom: 2rem;">
+                    Your daily dose of wisdom in just 60 seconds. Learn something new every day.
+                </p>
+                
+                <div class="about-grid">
+                    <div class="about-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Daily Facts</h3>
+                        <p>Curated facts to start your day with curiosity and wonder.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-brain"></i>
+                        <h3>Life Skills</h3>
+                        <p>Practical wisdom for everyday situations and challenges.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Career Growth</h3>
+                        <p>Strategic tips to advance your professional journey.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-coins"></i>
+                        <h3>Financial Wisdom</h3>
+                        <p>Smart money habits and wealth-building insights.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>Health Awareness</h3>
+                        <p>Quick wellness tips that make a real difference.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-microchip"></i>
+                        <h3>Tech Updates</h3>
+                        <p>Stay current with the latest technology trends.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 2rem; background: #f8f7f5; border-radius: 1.5rem; border: 1px solid #f0ede8;">
+                    <h4><i class="fas fa-rocket" style="color: #ad927b;"></i> Our Mission</h4>
+                    <p style="color: #6b6570; margin-top: 0.5rem;">
+                        We believe that learning should be simple, accessible, and enjoyable. 
+                        One Minute Knowledge delivers bite-sized wisdom that fits into your busy schedule, 
+                        helping you grow one minute at a time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div>
+            <span class="status-dot"></span>
+            <span style="margin-left: 0.5rem; color: #6b6570; font-size: 0.9rem;">
+                Backend: Python Flask API
+            </span>
+        </div>
+        <div class="python-badge">
+            <i class="fab fa-python"></i> 
+            <span>Powered by Python · 100+ Facts</span>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <i class="fas fa-info-circle"></i>
+        <span id="toastMessage">Loading...</span>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = 'http://localhost:5000';
+        
+        // DOM Elements
+        const factText = document.getElementById('factText');
+        const dailyFactBlock = document.getElementById('dailyFactBlock');
+        const topicGrid = document.getElementById('topicGrid');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        const breadcrumbCurrent = document.getElementById('breadcrumbCurrent');
+        const allPages = document.querySelectorAll('.page-section');
+
+        // Topic detail elements
+        const topicDetailTitle = document.getElementById('topicDetailTitle');
+        const topicDetailDesc = document.getElementById('topicDetailDesc');
+        const topicDetailIcon = document.getElementById('topicDetailIcon');
+        const topicFactDisplay = document.getElementById('topicFactDisplay');
+        const factCounter = document.getElementById('factCounter');
+        const refreshFactBtn = document.getElementById('refreshFactBtn');
+        const backToHomeBtn = document.getElementById('backToHomeBtn');
+        const totalFactsInTopic = document.getElementById('totalFactsInTopic');
+        const factsViewed = document.getElementById('factsViewed');
+
+        let currentTopic = null;
+        let currentFactIndex = 0;
+        let factsViewedCount = 0;
+        let topicFacts = [];
+
+        let toastTimeout;
+
+        // Show toast
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Navigation
+        function navigateTo(page, data = null) {
+            allPages.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            const targetPage = document.getElementById(`page-${page}`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === page) {
+                    link.classList.add('active');
+                }
+            });
+            
+            const pageNames = {
+                home: 'Dashboard',
+                'topic-detail': 'Topic Detail',
+                about: 'About'
+            };
+            breadcrumbCurrent.textContent = pageNames[page] || page;
+            
+            navMenu.classList.remove('open');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Navigation click handlers
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.dataset.page;
+                if (page === 'topics') {
+                    // Scroll to topics section on home page
+                    navigateTo('home');
+                    setTimeout(() => {
+                        document.querySelector('.topic-grid').scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    }, 300);
+                } else {
+                    navigateTo(page);
+                }
+            });
+        });
+
+        // Logo click
+        document.querySelector('.nav-logo').addEventListener('click', () => {
+            navigateTo('home');
+        });
+
+        // Breadcrumb clicks
+        document.querySelectorAll('.breadcrumb a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                navigateTo('home');
+            });
+        });
+
+        // Mobile toggle
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+            const icon = navToggle.querySelector('i');
+            icon.className = navMenu.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        // Fetch daily fact
+        async function fetchDailyFact() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/daily`);
+                if (!response.ok) throw new Error('Failed to fetch daily fact');
+                const data = await response.json();
+                factText.textContent = data.fact;
+                return data;
+            } catch (error) {
+                console.error('Error fetching daily fact:', error);
+                const fallbackFacts = [
+                    'The average person walks about 100,000 miles in a lifetime.',
+                    'Honey never spoils. Archaeologists found 3,000-year-old honey.',
+                    'Octopuses have three hearts, and two stop beating when they swim.'
+                ];
+                factText.textContent = fallbackFacts[Math.floor(Math.random() * fallbackFacts.length)];
+                showToast('⚠️ Using offline data - Python backend not running');
+                return { fact: fallbackFacts[0] };
+            }
+        }
+
+        // Fetch topic facts
+        async function fetchTopicFacts(topic) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/all-facts`);
+                if (!response.ok) throw new Error('Failed to fetch facts');
+                const data = await response.json();
+                
+                // Find matching topic
+                for (let key in data) {
+                    if (key.toLowerCase() === topic.toLowerCase()) {
+                        return data[key];
+                    }
+                }
+                return null;
+            } catch (error) {
+                console.error('Error fetching topic facts:', error);
+                const fallbackFacts = {
+                    'Daily Facts': ['The human body contains enough iron to make a 3-inch nail.'],
+                    'Life Skills': ['The 5-second rule: act within 5 seconds or your brain kills the idea.'],
+                    'Career Tips': ['85% of job success comes from soft skills.'],
+                    'Money Tips': ['The average millionaire reads at least one non-fiction book per month.'],
+                    'Health Awareness': ['Drinking water can boost metabolism by 24-30%.'],
+                    'Technology Updates': ['The first computer virus was created in 1983.']
+                };
+                return fallbackFacts[topic] || ['Knowledge is power. Keep learning!'];
+            }
+        }
+
+        // Render topic cards
+        function renderTopicCards() {
+            const topics = [
+                { name: 'Daily Facts', icon: 'fa-sun', color: '#f39c12', desc: 'Bite-sized curiosities' },
+                { name: 'Life Skills', icon: 'fa-brain', color: '#3498db', desc: 'Practical wisdom' },
+                { name: 'Career Tips', icon: 'fa-chart-line', color: '#2ecc71', desc: 'Strategic growth' },
+                { name: 'Money Tips', icon: 'fa-coins', color: '#e67e22', desc: 'Smart habits' },
+                { name: 'Health Awareness', icon: 'fa-heartbeat', color: '#e74c3c', desc: 'Wellness insights' },
+                { name: 'Technology Updates', icon: 'fa-microchip', color: '#9b59b6', desc: 'Stay current' }
+            ];
+
+            topicGrid.innerHTML = '';
+            
+            topics.forEach(topic => {
+                const card = document.createElement('div');
+                card.className = 'topic-card';
+                card.style.borderTop = `4px solid ${topic.color}`;
+                
+                card.innerHTML = `
+                    <div class="topic-icon" style="color: ${topic.color}">
+                        <i class="fas ${topic.icon}"></i>
+                    </div>
+                    <h3>${topic.name}</h3>
+                    <p>${topic.desc}</p>
+                    <div class="explore-btn">Explore →</div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    openTopicDetail(topic.name, topic.icon, topic.color, topic.desc);
+                });
+                
+                topicGrid.appendChild(card);
+            });
+        }
+
+        // Open topic detail
+        async function openTopicDetail(topicName, icon, color, desc) {
+            currentTopic = topicName;
+            factsViewedCount = 0;
+            currentFactIndex = 0;
+            
+            // Update header
+            topicDetailTitle.textContent = topicName;
+            topicDetailDesc.textContent = desc || `Explore ${topicName}`;
+            topicDetailIcon.innerHTML = `<i class="fas ${icon}" style="color: ${color}"></i>`;
+            topicDetailIcon.style.background = `${color}15`;
+            
+            // Fetch facts
+            const facts = await fetchTopicFacts(topicName);
+            if (facts && facts.length > 0) {
+                topicFacts = facts;
+                totalFactsInTopic.textContent = facts.length;
+                displayFact(0);
+            } else {
+                topicFacts = ['No facts available for this topic.'];
+                totalFactsInTopic.textContent = 0;
+                topicFactDisplay.textContent = 'No facts available.';
+            }
+            
+            // Navigate to detail page
+            navigateTo('topic-detail');
+            factsViewed.textContent = factsViewedCount;
+        }
+
+        // Display fact at index
+        function displayFact(index) {
+            if (topicFacts && topicFacts.length > 0) {
+                const fact = topicFacts[index % topicFacts.length];
+                topicFactDisplay.textContent = fact;
+                factCounter.textContent = `Fact #${(index % topicFacts.length) + 1} of ${topicFacts.length}`;
+                currentFactIndex = index;
+                factsViewedCount++;
+                factsViewed.textContent = factsViewedCount;
+            }
+        }
+
+        // Refresh fact
+        function refreshFact() {
+            if (topicFacts && topicFacts.length > 0) {
+                const newIndex = (currentFactIndex + 1) % topicFacts.length;
+                displayFact(newIndex);
+                showToast('🔄 New fact loaded!');
+            }
+        }
+
+        // Back to home
+        function backToHome() {
+            navigateTo('home');
+        }
+
+        // Initialize
+        async function init() {
+            await fetchDailyFact();
+            renderTopicCards();
+            
+            // Daily fact click to refresh
+            dailyFactBlock.addEventListener('click', async () => {
+                const originalText = factText.textContent;
+                factText.innerHTML = '<span class="loading"></span> Loading...';
+                
+                try {
+                    const data = await fetchDailyFact();
+                    factText.textContent = data.fact;
+                    showToast('🔄 Daily fact refreshed!');
+                } catch (error) {
+                    factText.textContent = originalText;
+                    showToast('❌ Failed to refresh');
+                }
+            });
+
+            // Refresh button
+            refreshFactBtn.addEventListener('click', refreshFact);
+
+            // Back button
+            backToHomeBtn.addEventListener('click', backToHome);
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'r' || e.key === 'R') {
+                    if (document.getElementById('page-topic-detail').classList.contains('active')) {
+                        refreshFact();
+                    }
+                }
+                if (e.key === 'Escape') {
+                    if (document.getElementById('page-topic-detail').classList.contains('active')) {
+                        backToHome();
+                    }
+                }
+            });
+
+            showToast('🚀 Click any topic to start learning!');
+        }
+
+        // Run on page load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
