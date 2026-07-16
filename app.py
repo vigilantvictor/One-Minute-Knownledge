@@ -1,10 +1,47 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
+import json
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+# Add CORS headers to ALL responses
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    response.headers['ngrok-skip-browser-warning'] = 'true'
+    return response
+
+@app.route('/', defaults={'path': ''}, methods=['OPTIONS'])
+@app.route('/<path:path>', methods=['OPTIONS'])
+def handle_options(path):
+    return '', 200
+
+# ------------------- SUBSCRIPTION PLANS -------------------
+SUBSCRIPTION_PLANS = {
+    "weekly": {
+        "name": "Weekly Plan",
+        "price": 49,
+        "duration": 7,
+        "duration_unit": "days"
+    },
+    "monthly": {
+        "name": "Monthly Plan",
+        "price": 99,
+        "duration": 30,
+        "duration_unit": "days"
+    },
+    "yearly": {
+        "name": "Yearly Plan",
+        "price": 999,
+        "duration": 365,
+        "duration_unit": "days"
+    }
+}
 
 # ------------------- LARGE DATABASE OF FACTS -------------------
 
@@ -171,17 +208,17 @@ def home():
             "/api/topic/<topic_name>": "Get random fact for a specific topic",
             "/api/topics": "Get all topic names",
             "/api/all-facts": "Get all facts organized by topic",
-            "/api/random-fact": "Get random fact from any topic"
+            "/api/random-fact": "Get random fact from any topic",
+            "/api/subscription/plans": "Get all subscription plans",
+            "/api/subscription/subscribe": "Subscribe to a plan (POST)"
         }
     })
 
 @app.route('/api/daily')
 def get_daily_fact():
-    """Return a daily fact based on the date"""
     today = datetime.now()
     day_of_year = today.timetuple().tm_yday
     fact_index = day_of_year % len(DAILY_FACTS)
-    
     return jsonify({
         "fact": DAILY_FACTS[fact_index],
         "date": today.strftime("%Y-%m-%d"),
@@ -190,12 +227,10 @@ def get_daily_fact():
 
 @app.route('/api/topics')
 def get_topics():
-    """Return all topic names"""
     return jsonify(list(TOPIC_FACTS.keys()))
 
 @app.route('/api/topic/<topic_name>')
 def get_topic_fact(topic_name):
-    """Return a random fact for a specific topic"""
     matching_topic = None
     for key in TOPIC_FACTS.keys():
         if key.lower() == topic_name.lower():
@@ -216,11 +251,9 @@ def get_topic_fact(topic_name):
 
 @app.route('/api/random-fact')
 def get_random_fact():
-    """Get a random fact from any topic"""
     topics = list(TOPIC_FACTS.keys())
     random_topic = random.choice(topics)
     facts = TOPIC_FACTS[random_topic]
-    
     return jsonify({
         "topic": random_topic,
         "fact": random.choice(facts)
@@ -228,8 +261,72 @@ def get_random_fact():
 
 @app.route('/api/all-facts')
 def get_all_facts():
-    """Get all facts organized by topic"""
     return jsonify(TOPIC_FACTS)
+
+# ------------------- SUBSCRIPTION ENDPOINTS -------------------
+
+@app.route('/api/subscription/plans', methods=['GET'])
+def get_subscription_plans():
+    """Get all subscription plans"""
+    return jsonify(SUBSCRIPTION_PLANS)
+
+@app.route('/api/subscription/subscribe', methods=['POST'])
+def subscribe():
+    """Subscribe to a plan (simulated payment)"""
+    try:
+        data = request.get_json()
+        plan_id = data.get('plan_id')
+        card_number = data.get('card_number', '').replace(' ', '').replace('-', '')
+        card_expiry = data.get('card_expiry')
+        card_cvv = data.get('card_cvv')
+        
+        if not plan_id or plan_id not in SUBSCRIPTION_PLANS:
+            return jsonify({
+                "success": False,
+                "message": "Invalid plan selected"
+            }), 400
+        
+        # Simulate payment validation
+        if len(card_number) != 16 or not card_number.isdigit():
+            return jsonify({
+                "success": False,
+                "message": "Invalid card number. Please enter a 16-digit card number."
+            }), 400
+        
+        if not card_expiry or len(card_expiry) != 5 or '/' not in card_expiry:
+            return jsonify({
+                "success": False,
+                "message": "Invalid expiry date. Please use MM/YY format."
+            }), 400
+        
+        if not card_cvv or len(card_cvv) != 3 or not card_cvv.isdigit():
+            return jsonify({
+                "success": False,
+                "message": "Invalid CVV. Please enter a 3-digit CVV."
+            }), 400
+        
+        plan = SUBSCRIPTION_PLANS[plan_id]
+        now = datetime.now()
+        expiry_date = now + timedelta(days=plan['duration'])
+        
+        # Generate a fake transaction ID
+        transaction_id = f"TX-{random.randint(100000, 999999)}-{random.randint(100, 999)}"
+        
+        # Return success response
+        return jsonify({
+            "success": True,
+            "message": f"Successfully subscribed to {plan['name']}!",
+            "transaction_id": transaction_id,
+            "plan": plan,
+            "start_date": now.strftime("%Y-%m-%d"),
+            "expiry_date": expiry_date.strftime("%Y-%m-%d")
+        }), 200
+        
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "message": f"Payment failed: {str(e)}"
+        }), 400
 
 if __name__ == '__main__':
     total_facts = sum(len(facts) for facts in TOPIC_FACTS.values())
@@ -238,15 +335,19 @@ if __name__ == '__main__':
     print("="*60)
     print(f"📍 Running at: http://localhost:5000")
     print(f"📚 Total facts: {total_facts} facts across {len(TOPIC_FACTS)} topics")
+    print(f"💳 Subscription plans loaded: {len(SUBSCRIPTION_PLANS)}")
     print("\n📖 Available endpoints:")
     print("   GET /api/daily              - Today's daily fact")
     print("   GET /api/topics             - List all topics")
     print("   GET /api/topic/<name>       - Random fact for a topic")
     print("   GET /api/random-fact        - Random fact from any topic")
     print("   GET /api/all-facts          - All facts organized by topic")
+    print("   GET /api/subscription/plans - Get subscription plans")
+    print("   POST /api/subscription/subscribe - Subscribe to a plan")
     print("\n💡 Examples:")
     print("   http://localhost:5000/api/topic/Career%20Tips")
     print("   http://localhost:5000/api/daily")
+    print("   http://localhost:5000/api/subscription/plans")
     print("\n🌐 Press Ctrl+C to stop the server\n")
     print("="*60 + "\n")
     
