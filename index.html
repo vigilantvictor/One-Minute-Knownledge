@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ========================================
+                   RESET & BASE
+                ======================================== */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +26,9 @@
             min-height: 100vh;
         }
 
-        /* ----- TOP NAVIGATION ----- */
+        /* ========================================
+                   TOP NAVIGATION
+                ======================================== */
         .top-nav {
             background: #ffffff;
             border-bottom: 1px solid #f0ede8;
@@ -128,7 +133,9 @@
             padding: 0.5rem;
         }
 
-        /* ----- BREADCRUMB ----- */
+        /* ========================================
+                   BREADCRUMB
+                ======================================== */
         .breadcrumb {
             max-width: 1280px;
             margin: 1.5rem auto 0;
@@ -158,7 +165,9 @@
             font-weight: 500;
         }
 
-        /* ----- MAIN CONTENT ----- */
+        /* ========================================
+                   MAIN CONTENT
+                ======================================== */
         .main-content {
             max-width: 1280px;
             margin: 0 auto;
@@ -166,7 +175,9 @@
             min-height: 70vh;
         }
 
-        /* ----- PAGE SECTIONS ----- */
+        /* ========================================
+                   PAGE SECTIONS
+                ======================================== */
         .page-section {
             display: none;
             animation: fadeIn 0.4s ease;
@@ -181,7 +192,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ----- HOME PAGE ----- */
+        /* ========================================
+                   HOME PAGE
+                ======================================== */
         .home-wrapper {
             background: #ffffff;
             border-radius: 2.5rem;
@@ -253,7 +266,9 @@
             color: #6b6570;
         }
 
-        /* Daily Fact */
+        /* ========================================
+                   DAILY FACT
+                ======================================== */
         .daily-fact-block {
             background: linear-gradient(135deg, #f8f6f3, #f1eee9);
             border-radius: 2rem;
@@ -313,7 +328,9 @@
             white-space: nowrap;
         }
 
-        /* Topic Grid */
+        /* ========================================
+                   TOPIC GRID
+                ======================================== */
         .topic-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -391,7 +408,9 @@
             transform: scale(1.05);
         }
 
-        /* ----- TOPIC DETAIL PAGE ----- */
+        /* ========================================
+                   TOPIC DETAIL PAGE
+                ======================================== */
         .topic-detail-wrapper {
             background: #ffffff;
             border-radius: 2.5rem;
@@ -542,7 +561,9 @@
             color: #6b6570;
         }
 
-        /* ----- ABOUT PAGE ----- */
+        /* ========================================
+                   ABOUT PAGE
+                ======================================== */
         .about-content {
             background: #ffffff;
             border-radius: 2.5rem;
@@ -596,7 +617,220 @@
             font-size: 0.95rem;
         }
 
-        /* Footer */
+        /* ========================================
+                   SUBSCRIPTION MODAL
+                ======================================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: #9b8f80;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #1a1a2e;
+            transform: rotate(90deg);
+        }
+
+        .modal-content h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .plan-option {
+            border: 2px solid #f0ede8;
+            border-radius: 1.5rem;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .plan-option:hover {
+            border-color: #d5cec5;
+        }
+
+        .plan-option.selected {
+            border-color: #ad927b;
+            background: #f8f6f3;
+            box-shadow: 0 0 0 4px rgba(173, 146, 123, 0.1);
+        }
+
+        .plan-option.recommended {
+            border-color: #ad927b;
+            background: #fcfaf8;
+        }
+
+        .recommended-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ad927b;
+            color: white;
+            font-size: 0.6rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .plan-option-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 0.3rem;
+        }
+
+        .plan-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .plan-duration {
+            font-size: 0.8rem;
+            color: #6b6570;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            font-size: 0.75rem;
+            color: #6b6570;
+        }
+
+        .plan-select-radio {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid #d5cec5;
+            margin: 0.5rem auto 0;
+            transition: all 0.3s ease;
+        }
+
+        .plan-option.selected .plan-select-radio {
+            border-color: #ad927b;
+            background: #ad927b;
+            box-shadow: inset 0 0 0 3px white, 0 0 0 2px #ad927b;
+        }
+
+        .payment-form {
+            margin-top: 1.5rem;
+        }
+
+        .payment-form .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .payment-form label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #1a1a2e;
+            margin-bottom: 0.3rem;
+        }
+
+        .payment-form input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #f0ede8;
+            border-radius: 1rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: #fcfcfa;
+        }
+
+        .payment-form input:focus {
+            outline: none;
+            border-color: #ad927b;
+            box-shadow: 0 0 0 4px rgba(173, 146, 123, 0.1);
+        }
+
+        .btn-subscribe {
+            width: 100%;
+            padding: 1rem;
+            background: #1a1a2e;
+            color: white;
+            border: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .btn-subscribe:hover {
+            background: #2d2d44;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 26, 46, 0.2);
+        }
+
+        .btn-subscribe:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ========================================
+                   FOOTER
+                ======================================== */
         .footer {
             max-width: 1280px;
             margin: 2rem auto 0;
@@ -640,22 +874,9 @@
             50% { opacity: 0.4; }
         }
 
-        /* Loading */
-        .loading {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border: 4px solid #f0ede8;
-            border-radius: 50%;
-            border-top-color: #ad927b;
-            animation: spin 0.8s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Toast */
+        /* ========================================
+                   TOAST
+                ======================================== */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -683,7 +904,26 @@
             color: #ad927b;
         }
 
-        /* ----- RESPONSIVE ----- */
+        /* ========================================
+                   LOADING
+                ======================================== */
+        .loading {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 4px solid #f0ede8;
+            border-radius: 50%;
+            border-top-color: #ad927b;
+            animation: spin 0.8s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ========================================
+                   RESPONSIVE
+                ======================================== */
         @media (max-width: 1024px) {
             .home-features {
                 grid-template-columns: repeat(2, 1fr);
@@ -776,6 +1016,14 @@
                 flex-direction: column;
                 gap: 1rem;
             }
+
+            .plan-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -817,7 +1065,9 @@
     </style>
 </head>
 <body>
-    <!-- TOP NAVIGATION -->
+    <!-- ========================================
+    TOP NAVIGATION
+    ======================================== -->
     <nav class="top-nav">
         <div class="nav-container">
             <div class="nav-logo" data-page="home">
@@ -836,33 +1086,36 @@
                 <li><a data-page="home" class="active"><i class="fas fa-home"></i> Home</a></li>
                 <li><a data-page="topics"><i class="fas fa-th-list"></i> Topics</a></li>
                 <li><a data-page="about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a id="subscribeNavBtn" style="background: #ad927b; color: white; padding: 0.6rem 1.5rem; border-radius: 60px;">
+                    <i class="fas fa-crown"></i> Subscribe
+                </a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- BREADCRUMB -->
+    <!-- ========================================
+    BREADCRUMB
+    ======================================== -->
     <div class="breadcrumb">
         <a data-page="home">Home</a>
         <span class="separator">/</span>
         <span class="current" id="breadcrumbCurrent">Dashboard</span>
     </div>
 
-    <!-- MAIN CONTENT -->
+    <!-- ========================================
+    MAIN CONTENT
+    ======================================== -->
     <div class="main-content">
         
         <!-- HOME PAGE -->
         <div class="page-section active" id="page-home">
             <div class="home-wrapper">
-                <!-- Hero -->
                 <div class="home-hero">
-                    <div class="hero-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
+                    <div class="hero-icon"><i class="fas fa-gem"></i></div>
                     <h2>Learn Something New Every Day</h2>
                     <p>Bite-sized wisdom delivered in just one minute. Explore, learn, and grow.</p>
                 </div>
 
-                <!-- Features -->
                 <div class="home-features">
                     <div class="feature-item">
                         <div class="feature-icon"><i class="fas fa-bolt"></i></div>
@@ -896,7 +1149,6 @@
                     </div>
                 </div>
 
-                <!-- Daily Fact -->
                 <div class="daily-fact-block" id="dailyFactBlock">
                     <div class="fact-text">
                         <i class="fas fa-lightbulb"></i>
@@ -911,13 +1163,10 @@
                     </div>
                 </div>
 
-                <!-- Topic Cards -->
                 <h3 style="margin: 2rem 0 1rem; font-size: 1.5rem; color: #1a1a2e;">
                     <i class="fas fa-th-list" style="color: #ad927b;"></i> Explore Topics
                 </h3>
-                <div class="topic-grid" id="topicGrid">
-                    <!-- Will be populated by JavaScript -->
-                </div>
+                <div class="topic-grid" id="topicGrid"></div>
             </div>
         </div>
 
@@ -925,9 +1174,7 @@
         <div class="page-section" id="page-topic-detail">
             <div class="topic-detail-wrapper">
                 <div class="topic-header">
-                    <div class="topic-big-icon" id="topicDetailIcon">
-                        <i class="fas fa-star"></i>
-                    </div>
+                    <div class="topic-big-icon" id="topicDetailIcon"><i class="fas fa-star"></i></div>
                     <div class="topic-title">
                         <h2 id="topicDetailTitle">Topic Name</h2>
                         <p id="topicDetailDesc">Click refresh to get a new fact</p>
@@ -936,19 +1183,13 @@
 
                 <div class="fact-display">
                     <div class="fact-icon"><i class="fas fa-quote-right"></i></div>
-                    <div class="fact-text-large" id="topicFactDisplay">
-                        Click the refresh button to get a random fact!
-                    </div>
+                    <div class="fact-text-large" id="topicFactDisplay">Click the refresh button to get a random fact!</div>
                     <div class="fact-counter" id="factCounter">Fact #1</div>
                 </div>
 
                 <div class="fact-actions">
-                    <button class="btn-refresh" id="refreshFactBtn">
-                        <i class="fas fa-sync-alt"></i> Refresh Fact
-                    </button>
-                    <button class="btn-back" id="backToHomeBtn">
-                        <i class="fas fa-arrow-left"></i> Back to Home
-                    </button>
+                    <button class="btn-refresh" id="refreshFactBtn"><i class="fas fa-sync-alt"></i> Refresh Fact</button>
+                    <button class="btn-back" id="backToHomeBtn"><i class="fas fa-arrow-left"></i> Back to Home</button>
                 </div>
 
                 <div class="topic-stats">
@@ -972,62 +1213,95 @@
         <div class="page-section" id="page-about">
             <div class="about-content">
                 <h2><i class="fas fa-info-circle" style="color: #ad927b; margin-right: 0.8rem;"></i>About One Minute Knowledge</h2>
-                <p style="color: #6b6570; font-size: 1.05rem; margin-bottom: 2rem;">
-                    Your daily dose of wisdom in just 60 seconds. Learn something new every day.
-                </p>
+                <p style="color: #6b6570; font-size: 1.05rem; margin-bottom: 2rem;">Your daily dose of wisdom in just 60 seconds. Learn something new every day.</p>
                 
                 <div class="about-grid">
-                    <div class="about-card">
-                        <i class="fas fa-bolt"></i>
-                        <h3>Daily Facts</h3>
-                        <p>Curated facts to start your day with curiosity and wonder.</p>
-                    </div>
-                    <div class="about-card">
-                        <i class="fas fa-brain"></i>
-                        <h3>Life Skills</h3>
-                        <p>Practical wisdom for everyday situations and challenges.</p>
-                    </div>
-                    <div class="about-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>Career Growth</h3>
-                        <p>Strategic tips to advance your professional journey.</p>
-                    </div>
-                    <div class="about-card">
-                        <i class="fas fa-coins"></i>
-                        <h3>Financial Wisdom</h3>
-                        <p>Smart money habits and wealth-building insights.</p>
-                    </div>
-                    <div class="about-card">
-                        <i class="fas fa-heartbeat"></i>
-                        <h3>Health Awareness</h3>
-                        <p>Quick wellness tips that make a real difference.</p>
-                    </div>
-                    <div class="about-card">
-                        <i class="fas fa-microchip"></i>
-                        <h3>Tech Updates</h3>
-                        <p>Stay current with the latest technology trends.</p>
-                    </div>
+                    <div class="about-card"><i class="fas fa-bolt"></i><h3>Daily Facts</h3><p>Curated facts to start your day with curiosity and wonder.</p></div>
+                    <div class="about-card"><i class="fas fa-brain"></i><h3>Life Skills</h3><p>Practical wisdom for everyday situations and challenges.</p></div>
+                    <div class="about-card"><i class="fas fa-chart-line"></i><h3>Career Growth</h3><p>Strategic tips to advance your professional journey.</p></div>
+                    <div class="about-card"><i class="fas fa-coins"></i><h3>Financial Wisdom</h3><p>Smart money habits and wealth-building insights.</p></div>
+                    <div class="about-card"><i class="fas fa-heartbeat"></i><h3>Health Awareness</h3><p>Quick wellness tips that make a real difference.</p></div>
+                    <div class="about-card"><i class="fas fa-microchip"></i><h3>Tech Updates</h3><p>Stay current with the latest technology trends.</p></div>
                 </div>
 
                 <div style="margin-top: 2rem; padding: 2rem; background: #f8f7f5; border-radius: 1.5rem; border: 1px solid #f0ede8;">
                     <h4><i class="fas fa-rocket" style="color: #ad927b;"></i> Our Mission</h4>
-                    <p style="color: #6b6570; margin-top: 0.5rem;">
-                        We believe that learning should be simple, accessible, and enjoyable. 
-                        One Minute Knowledge delivers bite-sized wisdom that fits into your busy schedule, 
-                        helping you grow one minute at a time.
-                    </p>
+                    <p style="color: #6b6570; margin-top: 0.5rem;">We believe that learning should be simple, accessible, and enjoyable. One Minute Knowledge delivers bite-sized wisdom that fits into your busy schedule, helping you grow one minute at a time.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- ========================================
+    SUBSCRIPTION MODAL
+    ======================================== -->
+    <div class="modal-overlay" id="subscriptionModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h2><i class="fas fa-crown" style="color: #ad927b;"></i> Subscribe to Premium</h2>
+            <p style="color: #6b6570; margin-bottom: 1.5rem;">Unlock all premium features and support our platform!</p>
+            
+            <div class="plan-selector" id="planSelector">
+                <div class="plan-option" data-plan="weekly">
+                    <div class="plan-option-content">
+                        <h4>Weekly</h4>
+                        <div class="plan-price">₹49</div>
+                        <div class="plan-duration">7 days</div>
+                        <div class="plan-features"><span>✅ Full access</span><span>✅ All topics</span></div>
+                    </div>
+                    <div class="plan-select-radio"></div>
+                </div>
+                <div class="plan-option recommended selected" data-plan="monthly">
+                    <div class="recommended-badge">Popular</div>
+                    <div class="plan-option-content">
+                        <h4>Monthly</h4>
+                        <div class="plan-price">₹99</div>
+                        <div class="plan-duration">30 days</div>
+                        <div class="plan-features"><span>✅ Full access</span><span>✅ All topics</span><span>✅ Best value</span></div>
+                    </div>
+                    <div class="plan-select-radio"></div>
+                </div>
+                <div class="plan-option" data-plan="yearly">
+                    <div class="plan-option-content">
+                        <h4>Yearly</h4>
+                        <div class="plan-price">₹999</div>
+                        <div class="plan-duration">365 days</div>
+                        <div class="plan-features"><span>✅ Full access</span><span>✅ All topics</span><span>✅ Save ₹189</span></div>
+                    </div>
+                    <div class="plan-select-radio"></div>
+                </div>
+            </div>
+
+            <div class="payment-form" id="paymentForm">
+                <div class="form-group">
+                    <label><i class="fas fa-credit-card"></i> Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <div class="form-group" style="flex: 1;">
+                        <label><i class="fas fa-calendar"></i> Expiry (MM/YY)</label>
+                        <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label><i class="fas fa-lock"></i> CVV</label>
+                        <input type="password" id="cardCvv" placeholder="***" maxlength="3">
+                    </div>
+                </div>
+                <button class="btn-subscribe" id="subscribeBtn"><i class="fas fa-lock"></i> Subscribe Now</button>
+                <p style="font-size: 0.75rem; color: #9b8f80; text-align: center; margin-top: 1rem;">
+                    <i class="fas fa-shield-alt"></i> This is a demo payment system. No real charges will be made.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+    FOOTER
+    ======================================== -->
     <div class="footer">
         <div>
             <span class="status-dot"></span>
-            <span style="margin-left: 0.5rem; color: #6b6570; font-size: 0.9rem;">
-                Backend: Python Flask API
-            </span>
+            <span style="margin-left: 0.5rem; color: #6b6570; font-size: 0.9rem;">Backend: Python Flask API</span>
         </div>
         <div class="python-badge">
             <i class="fab fa-python"></i> 
@@ -1035,17 +1309,27 @@
         </div>
     </div>
 
-    <!-- TOAST -->
+    <!-- ========================================
+    TOAST
+    ======================================== -->
     <div class="toast" id="toast">
         <i class="fas fa-info-circle"></i>
         <span id="toastMessage">Loading...</span>
     </div>
 
+    <!-- ========================================
+    JAVASCRIPT
+    ======================================== -->
     <script>
-        // Configuration
+        // ========================================
+        // CONFIGURATION
+        // ========================================
+        // CHANGE THIS TO YOUR NGROK URL WHEN DEPLOYING
         const API_BASE_URL = 'https://one-minute-knownledge.onrender.com';
         
-        // DOM Elements
+        // ========================================
+        // DOM ELEMENTS
+        // ========================================
         const factText = document.getElementById('factText');
         const dailyFactBlock = document.getElementById('dailyFactBlock');
         const topicGrid = document.getElementById('topicGrid');
@@ -1057,7 +1341,6 @@
         const breadcrumbCurrent = document.getElementById('breadcrumbCurrent');
         const allPages = document.querySelectorAll('.page-section');
 
-        // Topic detail elements
         const topicDetailTitle = document.getElementById('topicDetailTitle');
         const topicDetailDesc = document.getElementById('topicDetailDesc');
         const topicDetailIcon = document.getElementById('topicDetailIcon');
@@ -1068,65 +1351,65 @@
         const totalFactsInTopic = document.getElementById('totalFactsInTopic');
         const factsViewed = document.getElementById('factsViewed');
 
+        // Subscription elements
+        const subscriptionModal = document.getElementById('subscriptionModal');
+        const closeModal = document.getElementById('closeModal');
+        const subscribeNavBtn = document.getElementById('subscribeNavBtn');
+        const planOptions = document.querySelectorAll('.plan-option');
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        const cardNumber = document.getElementById('cardNumber');
+        const cardExpiry = document.getElementById('cardExpiry');
+        const cardCvv = document.getElementById('cardCvv');
+
         let currentTopic = null;
         let currentFactIndex = 0;
         let factsViewedCount = 0;
         let topicFacts = [];
-
+        let selectedPlan = 'monthly';
         let toastTimeout;
 
-        // Show toast
-        function showToast(message) {
+        // ========================================
+        // TOAST FUNCTION
+        // ========================================
+        function showToast(message, isError = false) {
             toastMessage.textContent = message;
             toast.classList.add('show');
+            toast.style.background = isError ? '#c0392b' : '#1a1a2e';
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => {
                 toast.classList.remove('show');
+                toast.style.background = '#1a1a2e';
             }, 3000);
         }
 
-        // Navigation
-        function navigateTo(page, data = null) {
-            allPages.forEach(section => {
-                section.classList.remove('active');
-            });
-            
+        // ========================================
+        // NAVIGATION
+        // ========================================
+        function navigateTo(page) {
+            allPages.forEach(section => section.classList.remove('active'));
             const targetPage = document.getElementById(`page-${page}`);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
+            if (targetPage) targetPage.classList.add('active');
             
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.dataset.page === page) {
-                    link.classList.add('active');
-                }
+                if (link.dataset.page === page) link.classList.add('active');
             });
             
-            const pageNames = {
-                home: 'Dashboard',
-                'topic-detail': 'Topic Detail',
-                about: 'About'
-            };
+            const pageNames = { home: 'Dashboard', 'topic-detail': 'Topic Detail', about: 'About' };
             breadcrumbCurrent.textContent = pageNames[page] || page;
-            
             navMenu.classList.remove('open');
+            document.getElementById('navToggle').querySelector('i').className = 'fas fa-bars';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Navigation click handlers
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const page = link.dataset.page;
                 if (page === 'topics') {
-                    // Scroll to topics section on home page
                     navigateTo('home');
                     setTimeout(() => {
-                        document.querySelector('.topic-grid').scrollIntoView({ 
-                            behavior: 'smooth', 
-                            block: 'start' 
-                        });
+                        document.querySelector('.topic-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }, 300);
                 } else {
                     navigateTo(page);
@@ -1134,76 +1417,145 @@
             });
         });
 
-        // Logo click
-        document.querySelector('.nav-logo').addEventListener('click', () => {
-            navigateTo('home');
-        });
-
-        // Breadcrumb clicks
+        document.querySelector('.nav-logo').addEventListener('click', () => navigateTo('home'));
         document.querySelectorAll('.breadcrumb a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                navigateTo('home');
-            });
+            link.addEventListener('click', (e) => { e.preventDefault(); navigateTo('home'); });
         });
 
-        // Mobile toggle
         navToggle.addEventListener('click', () => {
             navMenu.classList.toggle('open');
             const icon = navToggle.querySelector('i');
             icon.className = navMenu.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
         });
 
-        // Fetch daily fact
+        // ========================================
+        // SUBSCRIPTION
+        // ========================================
+        function openSubscriptionModal() {
+            subscriptionModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSubscriptionModal() {
+            subscriptionModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        subscribeNavBtn.addEventListener('click', openSubscriptionModal);
+        closeModal.addEventListener('click', closeSubscriptionModal);
+        subscriptionModal.addEventListener('click', (e) => {
+            if (e.target === subscriptionModal) closeSubscriptionModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && subscriptionModal.classList.contains('active')) closeSubscriptionModal();
+        });
+
+        planOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                planOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedPlan = option.dataset.plan;
+            });
+        });
+
+        // Card formatting
+        cardNumber.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 16) value = value.slice(0, 16);
+            value = value.replace(/(.{4})/g, '$1 ').trim();
+            e.target.value = value;
+        });
+
+        cardExpiry.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 4) value = value.slice(0, 4);
+            if (value.length > 2) value = value.slice(0, 2) + '/' + value.slice(2);
+            e.target.value = value;
+        });
+
+        cardCvv.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 3);
+        });
+
+        // Subscribe
+        subscribeBtn.addEventListener('click', async () => {
+            const cardNum = cardNumber.value.replace(/\s/g, '');
+            const expiry = cardExpiry.value;
+            const cvv = cardCvv.value;
+
+            if (cardNum.length !== 16) { showToast('❌ Please enter a valid 16-digit card number', true); return; }
+            if (!expiry.match(/^\d{2}\/\d{2}$/)) { showToast('❌ Please enter expiry in MM/YY format', true); return; }
+            if (cvv.length !== 3) { showToast('❌ Please enter a valid 3-digit CVV', true); return; }
+
+            subscribeBtn.disabled = true;
+            subscribeBtn.innerHTML = '<span class="loading"></span> Processing...';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/subscription/subscribe`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ plan_id: selectedPlan, card_number: cardNum, card_expiry: expiry, card_cvv: cvv })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    showToast(`✅ ${data.message}`);
+                    setTimeout(() => {
+                        closeSubscriptionModal();
+                        cardNumber.value = '';
+                        cardExpiry.value = '';
+                        cardCvv.value = '';
+                        planOptions.forEach(opt => opt.classList.remove('selected'));
+                        document.querySelector('.plan-option[data-plan="monthly"]').classList.add('selected');
+                        selectedPlan = 'monthly';
+                    }, 1500);
+                } else {
+                    showToast(`❌ ${data.message}`, true);
+                }
+            } catch (error) {
+                showToast('❌ Connection error. Please try again.', true);
+                console.error('Subscription error:', error);
+            } finally {
+                subscribeBtn.disabled = false;
+                subscribeBtn.innerHTML = '<i class="fas fa-lock"></i> Subscribe Now';
+            }
+        });
+
+        // ========================================
+        // API FUNCTIONS
+        // ========================================
         async function fetchDailyFact() {
             try {
                 const response = await fetch(`${API_BASE_URL}/api/daily`);
-                if (!response.ok) throw new Error('Failed to fetch daily fact');
+                if (!response.ok) throw new Error('Failed');
                 const data = await response.json();
                 factText.textContent = data.fact;
                 return data;
             } catch (error) {
-                console.error('Error fetching daily fact:', error);
-                const fallbackFacts = [
-                    'The average person walks about 100,000 miles in a lifetime.',
-                    'Honey never spoils. Archaeologists found 3,000-year-old honey.',
-                    'Octopuses have three hearts, and two stop beating when they swim.'
-                ];
-                factText.textContent = fallbackFacts[Math.floor(Math.random() * fallbackFacts.length)];
-                showToast('⚠️ Using offline data - Python backend not running');
-                return { fact: fallbackFacts[0] };
+                console.error('Daily fact error:', error);
+                factText.textContent = 'The average person walks about 100,000 miles in a lifetime.';
+                return null;
             }
         }
 
-        // Fetch topic facts
         async function fetchTopicFacts(topic) {
             try {
                 const response = await fetch(`${API_BASE_URL}/api/all-facts`);
-                if (!response.ok) throw new Error('Failed to fetch facts');
+                if (!response.ok) throw new Error('Failed');
                 const data = await response.json();
-                
-                // Find matching topic
                 for (let key in data) {
-                    if (key.toLowerCase() === topic.toLowerCase()) {
-                        return data[key];
-                    }
+                    if (key.toLowerCase() === topic.toLowerCase()) return data[key];
                 }
                 return null;
             } catch (error) {
-                console.error('Error fetching topic facts:', error);
-                const fallbackFacts = {
-                    'Daily Facts': ['The human body contains enough iron to make a 3-inch nail.'],
-                    'Life Skills': ['The 5-second rule: act within 5 seconds or your brain kills the idea.'],
-                    'Career Tips': ['85% of job success comes from soft skills.'],
-                    'Money Tips': ['The average millionaire reads at least one non-fiction book per month.'],
-                    'Health Awareness': ['Drinking water can boost metabolism by 24-30%.'],
-                    'Technology Updates': ['The first computer virus was created in 1983.']
-                };
-                return fallbackFacts[topic] || ['Knowledge is power. Keep learning!'];
+                console.error('Topic facts error:', error);
+                return null;
             }
         }
 
-        // Render topic cards
+        // ========================================
+        // RENDER TOPIC CARDS
+        // ========================================
         function renderTopicCards() {
             const topics = [
                 { name: 'Daily Facts', icon: 'fa-sun', color: '#f39c12', desc: 'Bite-sized curiosities' },
@@ -1215,42 +1567,34 @@
             ];
 
             topicGrid.innerHTML = '';
-            
             topics.forEach(topic => {
                 const card = document.createElement('div');
                 card.className = 'topic-card';
                 card.style.borderTop = `4px solid ${topic.color}`;
-                
                 card.innerHTML = `
-                    <div class="topic-icon" style="color: ${topic.color}">
-                        <i class="fas ${topic.icon}"></i>
-                    </div>
+                    <div class="topic-icon" style="color: ${topic.color}"><i class="fas ${topic.icon}"></i></div>
                     <h3>${topic.name}</h3>
                     <p>${topic.desc}</p>
                     <div class="explore-btn">Explore →</div>
                 `;
-                
-                card.addEventListener('click', () => {
-                    openTopicDetail(topic.name, topic.icon, topic.color, topic.desc);
-                });
-                
+                card.addEventListener('click', () => openTopicDetail(topic.name, topic.icon, topic.color, topic.desc));
                 topicGrid.appendChild(card);
             });
         }
 
-        // Open topic detail
+        // ========================================
+        // OPEN TOPIC DETAIL
+        // ========================================
         async function openTopicDetail(topicName, icon, color, desc) {
             currentTopic = topicName;
             factsViewedCount = 0;
             currentFactIndex = 0;
-            
-            // Update header
+
             topicDetailTitle.textContent = topicName;
             topicDetailDesc.textContent = desc || `Explore ${topicName}`;
             topicDetailIcon.innerHTML = `<i class="fas ${icon}" style="color: ${color}"></i>`;
             topicDetailIcon.style.background = `${color}15`;
-            
-            // Fetch facts
+
             const facts = await fetchTopicFacts(topicName);
             if (facts && facts.length > 0) {
                 topicFacts = facts;
@@ -1261,13 +1605,11 @@
                 totalFactsInTopic.textContent = 0;
                 topicFactDisplay.textContent = 'No facts available.';
             }
-            
-            // Navigate to detail page
+
             navigateTo('topic-detail');
             factsViewed.textContent = factsViewedCount;
         }
 
-        // Display fact at index
         function displayFact(index) {
             if (topicFacts && topicFacts.length > 0) {
                 const fact = topicFacts[index % topicFacts.length];
@@ -1279,7 +1621,6 @@
             }
         }
 
-        // Refresh fact
         function refreshFact() {
             if (topicFacts && topicFacts.length > 0) {
                 const newIndex = (currentFactIndex + 1) % topicFacts.length;
@@ -1288,55 +1629,39 @@
             }
         }
 
-        // Back to home
         function backToHome() {
             navigateTo('home');
         }
 
-        // Initialize
+        // ========================================
+        // INITIALIZE
+        // ========================================
         async function init() {
             await fetchDailyFact();
             renderTopicCards();
-            
-            // Daily fact click to refresh
+
             dailyFactBlock.addEventListener('click', async () => {
-                const originalText = factText.textContent;
-                factText.innerHTML = '<span class="loading"></span> Loading...';
-                
-                try {
-                    const data = await fetchDailyFact();
-                    factText.textContent = data.fact;
-                    showToast('🔄 Daily fact refreshed!');
-                } catch (error) {
-                    factText.textContent = originalText;
-                    showToast('❌ Failed to refresh');
-                }
+                const el = document.getElementById('factText');
+                el.textContent = '⏳ Loading...';
+                await fetchDailyFact();
+                showToast('🔄 Daily fact refreshed!');
             });
 
-            // Refresh button
             refreshFactBtn.addEventListener('click', refreshFact);
-
-            // Back button
             backToHomeBtn.addEventListener('click', backToHome);
 
-            // Keyboard shortcuts
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'r' || e.key === 'R') {
-                    if (document.getElementById('page-topic-detail').classList.contains('active')) {
-                        refreshFact();
-                    }
+                if ((e.key === 'r' || e.key === 'R') && document.getElementById('page-topic-detail').classList.contains('active')) {
+                    refreshFact();
                 }
-                if (e.key === 'Escape') {
-                    if (document.getElementById('page-topic-detail').classList.contains('active')) {
-                        backToHome();
-                    }
+                if (e.key === 'Escape' && document.getElementById('page-topic-detail').classList.contains('active')) {
+                    backToHome();
                 }
             });
 
             showToast('🚀 Click any topic to start learning!');
         }
 
-        // Run on page load
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
